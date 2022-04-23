@@ -16,7 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class MovieList {
 
     ArrayList<Movie> movieList;
-    ArrayList<String >movies = null;
+    ArrayList<String> movies = null;
     int llength;
 
     public MovieList() {
@@ -94,7 +94,7 @@ public class MovieList {
         return year;
     }
 
-    public String  getGenre(String movie) {
+    public String getGenre(String movie) {
         String genre = null;
         for (int i = 0; i < llength; i++) {
             if (movie.contains(movieList.get(i).getMovName())) {

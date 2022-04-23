@@ -5,16 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     ListView text;
     Context context = null;
     ArrayList<String> movies;
+    EditText search;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = MainActivity.this;
         movies = new ArrayList<>();
+        search = (EditText) findViewById(R.id.search);
+        button = (Button) findViewById(R.id.button);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         MovieList movielist = new MovieList();
@@ -30,6 +38,22 @@ public class MainActivity extends AppCompatActivity {
         }
         text = (ListView) findViewById(R.id.listview);
         ArrayAdapter<String> linesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, movies);
-        text.setAdapter(linesAdapter);    }
+        text.setAdapter(linesAdapter);
 
+    }
+
+
+    public void searchMovie(View v) {
+        System.out.println("moi1");
+        String name = search.getText().toString();
+            if (!name.isEmpty()){
+                for(int i = 0; i < movies.size(); i++){
+                    if(name == null) {
+                        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Collections.singletonList(movies.get(i)));
+                        text.setAdapter(adapter);
+            }
+        }
+
+    }
+    }
 }
