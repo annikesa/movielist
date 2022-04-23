@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     EditText search;
     Button button;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         MovieList movielist = new MovieList();
-        for (int i = 0; i < movielist.movieList.size(); i++) {
-            movies.add(movielist.movieList.get(i).name.toString());
+        for (int i = 0; i < movielist.list1.size(); i++) {
+            movies.add(movielist.list1.get(i).name.toString());
         }
         text = (ListView) findViewById(R.id.listview);
         ArrayAdapter<String> linesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, movies);
@@ -46,9 +48,13 @@ public class MainActivity extends AppCompatActivity {
     public void searchMovie(View v) {
         System.out.println("moi1");
         String name = search.getText().toString();
+        System.out.println(name);
             if (!name.isEmpty()){
+                System.out.println("moi2");
                 for(int i = 0; i < movies.size(); i++){
-                    if(name == null) {
+                    System.out.println(movies.get(i));
+                    if(name.equals(movies.get(i))) {
+                        System.out.println("moi4");
                         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Collections.singletonList(movies.get(i)));
                         text.setAdapter(adapter);
             }
