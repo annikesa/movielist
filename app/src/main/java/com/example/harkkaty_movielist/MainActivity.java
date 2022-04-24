@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("moi1");
         String input = search.getText().toString();
         System.out.println(input);
+        ArrayList<String> find = new ArrayList<>();
             if (!input.isEmpty()){
                 System.out.println("moi2");
                 for(int i = 0; i < movies.size(); i++){
@@ -63,10 +64,13 @@ public class MainActivity extends AppCompatActivity {
             }
                     if(movielist.list1.get(i).genre.contains(input)) {
                         System.out.println("moi5");
-                        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Collections.singletonList(movies.get(i)));
-                        text.setAdapter(adapter);
+                        find.add(movies.get(i));
+
+
                     }
         }
+                ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, find);
+                text.setAdapter(adapter);
 
     }
     }
