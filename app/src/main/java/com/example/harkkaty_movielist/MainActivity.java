@@ -56,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
                 for(int i = 0; i < movies.size(); i++){
 
                     System.out.println(movies.get(i));
-                    if(input.equals(movielist.list1.get(i).name)) {
+                    if(movielist.list1.get(i).name.contains(input)) {
                         System.out.println("moi4");
                         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Collections.singletonList(movies.get(i)));
                         text.setAdapter(adapter);
             }
-                    if(input.equals(movielist.list1.get(i).genre)) {
+                    if(movielist.list1.get(i).genre.contains(input)) {
                         System.out.println("moi5");
                         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Collections.singletonList(movies.get(i)));
                         text.setAdapter(adapter);
