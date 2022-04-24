@@ -50,7 +50,15 @@ public class MainActivity extends AppCompatActivity {
     public void searchMovie(View v) {
         System.out.println("moi1");
         String input = search.getText().toString();
-        System.out.println(input);
+        String firstLetter = input.substring(0, 1);
+        String remainingLetters = input.substring(1, input.length());
+
+        // change the first letter to uppercase
+        firstLetter = firstLetter.toUpperCase();
+
+        // join the two substrings
+        input = firstLetter + remainingLetters;
+
         ArrayList<String> find = new ArrayList<>();
             if (!input.isEmpty()){
                 System.out.println("moi2");
@@ -59,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(movies.get(i));
                     if(movielist.list1.get(i).name.contains(input)) {
                         System.out.println("moi4");
-                        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Collections.singletonList(movies.get(i)));
-                        text.setAdapter(adapter);
+                        find.add(movies.get(i));
+
             }
                     if(movielist.list1.get(i).genre.contains(input)) {
                         System.out.println("moi5");
