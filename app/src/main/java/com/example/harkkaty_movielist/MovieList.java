@@ -19,6 +19,8 @@ public class MovieList {
     ArrayList<String> movies = null;
     int llength;
 
+
+
     public MovieList() {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         list1 = new ArrayList<Movie>();
@@ -77,7 +79,7 @@ public class MovieList {
     public String getLength(String movie) {
         String length = null;
         for (int i = 0; i < llength; i++) {
-            if (movie.contains(list1.get(i).getMovName())) {
+            if (movie.contains(list1.get(i).getLength())) {
                 length = list1.get(i).length;
             }
         }
@@ -87,7 +89,7 @@ public class MovieList {
     public String getYear(String movie) {
         String year = null;
         for (int i = 0; i < llength; i++) {
-            if (movie.contains(list1.get(i).getMovName())) {
+            if (movie.contains(list1.get(i).getYear())) {
                 year = list1.get(i).year;
             }
         }
@@ -97,7 +99,7 @@ public class MovieList {
     public String getGenre(String movie) {
         String genre = null;
         for (int i = 0; i < llength; i++) {
-            if (movie.contains(list1.get(i).getMovName())) {
+            if (movie.contains(list1.get(i).getGenre())) {
                 genre = list1.get(i).genre;
             }
         }

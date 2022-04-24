@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> movies;
     EditText search;
     Button button;
+    MovieList movielist;
 
 
 
@@ -34,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        MovieList movielist = new MovieList();
+        movielist = new MovieList();
         for (int i = 0; i < movielist.list1.size(); i++) {
             movies.add(movielist.list1.get(i).name.toString());
+
         }
         text = (ListView) findViewById(R.id.listview);
         ArrayAdapter<String> linesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, movies);
@@ -47,17 +49,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void searchMovie(View v) {
         System.out.println("moi1");
-        String name = search.getText().toString();
-        System.out.println(name);
-            if (!name.isEmpty()){
+        String input = search.getText().toString();
+        System.out.println(input);
+            if (!input.isEmpty()){
                 System.out.println("moi2");
                 for(int i = 0; i < movies.size(); i++){
+
                     System.out.println(movies.get(i));
-                    if(name.equals(movies.get(i))) {
+                    if(input.equals(movielist.list1.get(i).name)) {
                         System.out.println("moi4");
                         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Collections.singletonList(movies.get(i)));
                         text.setAdapter(adapter);
             }
+                    if(input.equals(movielist.list1.get(i).genre)) {
+                        System.out.println("moi5");
+                        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, Collections.singletonList(movies.get(i)));
+                        text.setAdapter(adapter);
+                    }
         }
 
     }
