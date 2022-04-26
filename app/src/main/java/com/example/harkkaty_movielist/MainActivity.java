@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,17 +23,28 @@ public class MainActivity extends AppCompatActivity {
     EditText search;
     Button button;
     MovieList movielist;
-
+    private Object LayoutInflater;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("Movisio");
+        /*androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        actionBar.setDisplayShowCustomEnabled(true);
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.custom_image, null);
+        actionBar.setCustomView(v);*/
+
         context = MainActivity.this;
         movies = new ArrayList<>();
         search = (EditText) findViewById(R.id.search);
         button = (Button) findViewById(R.id.button);
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         movielist = new MovieList();
@@ -60,26 +72,41 @@ public class MainActivity extends AppCompatActivity {
         input = firstLetter + remainingLetters;
 
         ArrayList<String> find = new ArrayList<>();
-            if (!input.isEmpty()){
-                System.out.println("moi2");
-                for(int i = 0; i < movies.size(); i++){
+        if (!input.isEmpty()) {
+            System.out.println("moi2");
+            for (int i = 0; i < movies.size(); i++) {
 
-                    System.out.println(movies.get(i));
-                    if(movielist.list1.get(i).name.contains(input)) {
-                        System.out.println("moi4");
-                        find.add(movies.get(i));
+                System.out.println(movies.get(i));
+                if (movielist.list1.get(i).name.contains(input)) {
+                    System.out.println("moi4");
+                    find.add(movies.get(i));
+
+                }
+                if (movielist.list1.get(i).genre.contains(input)) {
+                    System.out.println("moi5");
+                    find.add(movies.get(i));
+
+                }
 
             }
-                    if(movielist.list1.get(i).genre.contains(input)) {
-                        System.out.println("moi5");
-                        find.add(movies.get(i));
+            if (find.isEmpty()){
+
+                find.add("Movie not found");
+            }
+               /* if (movielist.list1.get(i).firstname.contains(input)) {
+                    System.out.println("moi5");
+                    find.add(movies.get(i));
+                }
+                if (movielist.list1.get(i).lastname.contains(input)) {
+                    System.out.println("moi5");
+                    find.add(movies.get(i));
+                }*/
 
 
-                    }
+            ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, find);
+            text.setAdapter(adapter);
         }
-                ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, find);
-                text.setAdapter(adapter);
+        }
+    }
 
-    }
-    }
-}
+

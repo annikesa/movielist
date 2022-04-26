@@ -48,22 +48,44 @@ public class MovieList {
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
 
+
                 String title = element.getElementsByTagName("Title").item(0).getTextContent();
                 String genre = element.getElementsByTagName("Genres").item(0).getTextContent();
                 String length = element.getElementsByTagName("LengthInMinutes").item(0).getTextContent();
                 String year = element.getElementsByTagName("ProductionYear").item(0).getTextContent();
+                String actor = element.getElementsByTagName("Actor").item(0).getTextContent();
 
-                list1.add(new Movie(title,length,year,genre));
-                System.out.println();
-                System.out.println(title + length);
+
+                NodeList flowList = element.getElementsByTagName("Cast");
+
+                    for (int i = 0; i < flowList.getLength(); i++) {
+                        NodeList childList = flowList.item(i).getChildNodes();
+                        for (int j = 0; j < childList.getLength(); j++) {
+                            Node childNode = childList.item(j);
+                            if ("Actor".equals(childNode.getNodeName())) {
+                                System.out.println(childList.item(j).getTextContent()
+                                        .trim());
+                                System.out.println("HELLOUUU");
+                            }
+                            else {
+                                System.out.println("No actors.");
+                            }
+                          }
+
+
+                    }
+
+                list1.add(new Movie(title, length, year, genre));
             }
         }
     }
 
 
+
     public void addMovie(String name, String length, String year,String genre) {
         list1.add(new Movie(name,length,year,genre));
         llength++;
+
     }
 
     public ArrayList getNames() {

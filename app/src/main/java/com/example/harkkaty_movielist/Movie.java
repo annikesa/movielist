@@ -18,6 +18,7 @@ public class Movie {
     String year;
     String genre;
 
+
     public Movie ( String name, String length, String year,String genre) {
 
         this.name = name;
@@ -42,5 +43,8 @@ public class Movie {
     public String getGenre(){
         return genre;
     }
+
+
+
 
 }
