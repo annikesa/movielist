@@ -16,8 +16,8 @@ import javax.xml.parsers.ParserConfigurationException;
 public class MovieList {
 
     ArrayList<Movie> list1;
-    ArrayList<String> movies = null;
     int llength;
+
 
 
 
@@ -43,7 +43,7 @@ public class MovieList {
         doc.getDocumentElement().normalize();
         NodeList list = doc.getDocumentElement().getElementsByTagName("Event");
         for (int temp = 0; temp < list.getLength(); temp++) {
-
+            ArrayList<Actor> actorList = new ArrayList<>();
             Node node = list.item(temp);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
@@ -53,37 +53,50 @@ public class MovieList {
                 String genre = element.getElementsByTagName("Genres").item(0).getTextContent();
                 String length = element.getElementsByTagName("LengthInMinutes").item(0).getTextContent();
                 String year = element.getElementsByTagName("ProductionYear").item(0).getTextContent();
-                String actor = element.getElementsByTagName("Actor").item(0).getTextContent();
 
 
-                NodeList flowList = element.getElementsByTagName("Cast");
 
-                    for (int i = 0; i < flowList.getLength(); i++) {
-                        NodeList childList = flowList.item(i).getChildNodes();
-                        for (int j = 0; j < childList.getLength(); j++) {
-                            Node childNode = childList.item(j);
-                            if ("Actor".equals(childNode.getNodeName())) {
-                                System.out.println(childList.item(j).getTextContent()
-                                        .trim());
-                                System.out.println("HELLOUUU");
+
+                Node cast = element.getElementsByTagName("Cast").item(0);
+                //while(cast.hasChildNodes()==true){
+
+                    if (cast.getNodeType() == Node.ELEMENT_NODE) {
+                        Element castEl = (Element) cast;
+                        NodeList actors = castEl.getElementsByTagName("Actor");
+
+                        for (int i = 0; i < actors.getLength(); i++) {
+                            Node actorNode = actors.item(i);
+                            if (actorNode.getNodeType() == Node.ELEMENT_NODE) {
+                                Element actorEl = (Element) actorNode;
+                                String first = actorEl.getElementsByTagName("FirstName").item(0).getTextContent();
+                                String last = actorEl.getElementsByTagName("LastName").item(0).getTextContent();
+                                actorList.add(new Actor(first, last));
+
                             }
-                            else {
-                                System.out.println("No actors.");
-                            }
-                          }
+                        }
 
 
-                    }
 
-                list1.add(new Movie(title, length, year, genre));
+
+                }
+                list1.add(new Movie(title, length, year, genre, actorList));
+
+
             }
+
+
+
+            }
+
+
+
         }
-    }
 
 
 
-    public void addMovie(String name, String length, String year,String genre) {
-        list1.add(new Movie(name,length,year,genre));
+
+    public void addMovie(String name, String length, String year,String genre, ArrayList <Actor> actorList) {
+        list1.add(new Movie(name,length,year,genre, actorList));
         llength++;
 
     }

@@ -15,6 +15,7 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     ListView text;
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         }
         text = (ListView) findViewById(R.id.listview);
         ArrayAdapter<String> linesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, movies);
-        text.setAdapter(linesAdapter);
 
     }
 
@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
         // join the two substrings
         input = firstLetter + remainingLetters;
+
+        if (input.contains(" ")){
+            String[] arrOfInput = input.split(" ",2);
+            input = arrOfInput[0] + " "+ arrOfInput[1];
+        }
 
         ArrayList<String> find = new ArrayList<>();
         if (!input.isEmpty()) {
@@ -87,21 +92,22 @@ public class MainActivity extends AppCompatActivity {
                     find.add(movies.get(i));
 
                 }
+                System.out.println("2222222222222");
+                for (Actor a : movielist.list1.get(i).actorArrayList) {
+                    String fullName = a.getFirstname()+" "+a.getLastname();
 
+                    System.out.println(("###################"));
+                    if (fullName.equalsIgnoreCase(input)) {
+                        System.out.println(fullName);
+                        find.add(movies.get(i));
+                    }
+
+                }
             }
             if (find.isEmpty()){
 
                 find.add("Movie not found");
             }
-               /* if (movielist.list1.get(i).firstname.contains(input)) {
-                    System.out.println("moi5");
-                    find.add(movies.get(i));
-                }
-                if (movielist.list1.get(i).lastname.contains(input)) {
-                    System.out.println("moi5");
-                    find.add(movies.get(i));
-                }*/
-
 
             ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, find);
             text.setAdapter(adapter);
